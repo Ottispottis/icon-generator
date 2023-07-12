@@ -1,6 +1,8 @@
 import { type NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { useState } from "react";
+import { Button } from "~/components/Button";
 import { FormGroup } from "~/components/formGroup";
 import { Input } from "~/components/input";
 import { api } from "~/utils/api";
@@ -28,6 +30,10 @@ const GeneratePage: NextPage = () => {
             setForm(prev =>({
                 ...prev, [key]: e.target.value}))}
         }
+
+    const session = useSession();
+
+    const isLoggedIn = !!session.data;
     
   return (
     <>
@@ -37,6 +43,16 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center">
+        {!isLoggedIn && 
+        <Button onClick={()=>{
+            signIn().catch(console.error);
+        }}>Login</Button>
+        }
+        {isLoggedIn && 
+        <Button onClick={()=>{
+            signOut().catch(console.error);
+        }}>Logout</Button>
+        }  
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <FormGroup>
                 <label>Prompt</label>
@@ -44,7 +60,7 @@ const GeneratePage: NextPage = () => {
                 value={form.prompt} onChange={updateForm("prompt")}></Input>
             </FormGroup>
             
-            <button className="bg-blue-400 px-4 py-2 rounded hover:bg-blue-500">Submit</button>
+            <Button>Submit</Button>
         </form>
       </main>
     </>
