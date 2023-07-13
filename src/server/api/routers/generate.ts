@@ -1,13 +1,23 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
+
 import {
-    createTRPCRouter, protectedProcedure, publicProcedure
+    createTRPCRouter, protectedProcedure
 } from "~/server/api/trpc";
 
+import AWS from 'aws-sdk';
 import { Configuration, OpenAIApi } from "openai";
+import { base64Image } from "~/data/b64Image";
 import { env } from "~/env.mjs";
 
+const s3 = new AWS.S3({
+    credentials:{
+        accessKeyId: env.AWS_ACCESS_ID,
+        secretAccessKey: env.AWS_SECRET_ACCESS_KEY
+    },
+    region: "eu-north-1"
+});
 
 const configuration = new Configuration({
     apiKey: env.OPENAI_API_KEY
@@ -16,14 +26,15 @@ const openai = new OpenAIApi(configuration);
 
 async function iconGeneration(prompt: string): Promise<string | undefined> {
     if (env.MOCK_DALLE === 'true'){
-        return "https://oaidalleapiprodscus.blob.core.windows.net/private/org-j2XZ8Jz3FD2ekVEA6yEF21sT/user-e9hOQXjjemrLbEIVBf1XQs4y/img-jPMnpVhxonqVpEaFUpRgIu59.png?st=2023-07-13T10%3A12%3A20Z&se=2023-07-13T12%3A12%3A20Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2023-07-12T20%3A26%3A06Z&ske=2023-07-13T20%3A26%3A06Z&sks=b&skv=2021-08-06&sig=UBQVH23JqwrFBqS1ACXaJmPS//pkWbk7rP5A4Zyy0P0%3D";
+        return base64Image;
     }else{
         const response = await openai.createImage({
             prompt,
             n: 1,
-            size: "256x256"
+            size: "256x256",
+            response_format: "b64_json"
         });
-        return response.data.data[0]?.url;
+        return response.data.data[0]?.b64_json;
     }
 }
 
@@ -49,12 +60,26 @@ export const generateRouter = createTRPCRouter({
             });
         }
 
-        // TODO: Fetch request to DALLE api
+        const base64EncodedImage = await iconGeneration(input.prompt);
 
-        const url = await iconGeneration(input.prompt);
+        const icon = await ctx.prisma.icon.create({
+            data: {
+                prompt: input.prompt,
+                userId: ctx.session.user.id,
+            }
+        });
+
+        await s3.putObject({
+            Bucket: "icon-generator-dalle",
+            Body: Buffer.from(base64EncodedImage!, "base64"),
+            Key: icon.id,
+            ContentEncoding: "base64",
+            ContentType: "image/png"
+        })
+        .promise();
 
         return {
-            imageUrl: url,
+            imageUrl: base64EncodedImage,
         }
        
     }),
