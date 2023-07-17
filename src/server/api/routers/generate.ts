@@ -62,6 +62,8 @@ export const generateRouter = createTRPCRouter({
 
         const base64EncodedImage = await iconGeneration(input.prompt);
 
+        const BUCKET_NAME = 'icon-generator-dalle';
+
         const icon = await ctx.prisma.icon.create({
             data: {
                 prompt: input.prompt,
@@ -70,7 +72,7 @@ export const generateRouter = createTRPCRouter({
         });
 
         await s3.putObject({
-            Bucket: "icon-generator-dalle",
+            Bucket: BUCKET_NAME,
             Body: Buffer.from(base64EncodedImage!, "base64"),
             Key: icon.id,
             ContentEncoding: "base64",
@@ -79,7 +81,7 @@ export const generateRouter = createTRPCRouter({
         .promise();
 
         return {
-            imageUrl: base64EncodedImage,
+            imageUrl: `https://${BUCKET_NAME}.s3.eu-north-1.amazonaws.com/${icon.id}`
         }
        
     }),
