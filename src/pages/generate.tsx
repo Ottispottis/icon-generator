@@ -6,11 +6,9 @@ import { useState } from "react";
 import { Button } from "~/components/Button";
 import { FormGroup } from "~/components/formGroup";
 import { Input } from "~/components/input";
-import { useBuyCredits } from "~/hooks/useBuyCredits";
 import { api } from "~/utils/api";
 
 const GeneratePage: NextPage = () => {
-    const {buyCredits} = useBuyCredits();
     const [form, setForm] = useState({prompt: ""})
     const [imageUrl, setImageUrl] = useState('')
 
@@ -57,7 +55,7 @@ const GeneratePage: NextPage = () => {
                 value={form.prompt} onChange={updateForm("prompt")}></Input>
             </FormGroup>
             
-            <Button>Submit</Button>
+            <Button onClick={handleSubmit}>Submit</Button>
             <Image src={imageUrl} alt="Generated prompt image" width="100" height="100"></Image>
         </form> : <div>Login to generate icons</div>}
       </main>
