@@ -11,7 +11,7 @@ export function Header(){
     const {buyCredits} = useBuyCredits();
     const session = useSession();
     const isLoggedIn = !!session.data;
-    return <header className="dark: bg-gray-900">
+    return <header className="bg-gray-300 dark:bg-gray-900">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 ">
             <MyLink href="/" >Icon Generator</MyLink>
             <ul>
