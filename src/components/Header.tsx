@@ -14,8 +14,9 @@ export function Header(){
     return <header className="bg-gray-300 dark:bg-gray-900">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 ">
             <MyLink href="/" >Icon Generator</MyLink>
-            <ul>
+            <ul className="flex gap-4">
                 <li><MyLink href={"/generate"} >Generate</MyLink></li>
+                {isLoggedIn && <li><MyLink href={"/collection"} >Collection</MyLink></li>}
             </ul>
             <ul className="flex gap-4">
                 {isLoggedIn ? <><li>
@@ -42,7 +43,6 @@ export function Header(){
                         
                 }
             </ul>
-            <div>Account</div>
         </div>
     </header>
 }
