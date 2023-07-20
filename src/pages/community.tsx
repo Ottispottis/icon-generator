@@ -7,18 +7,18 @@ import { api } from "~/utils/api";
 
 const CollectionPage: NextPage = () => {
 
-    const icons = api.icons.getIcons.useQuery();
+    const icons = api.icons.getCommunityIcons.useQuery();
     
     
   return (
     <>
       <Head>
-        <title>Your Icons</title>
-        <meta name="description" content="Your Icons" />
+        <title>Community Icons</title>
+        <meta name="description" content="Community Icons" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=" mt-12 sm:mt-24 flex min-h-screen flex-col container mx-auto px-4">
-        <h1 className="text-4xl">Your Icons</h1>
+        <h1 className="text-4xl mb-5">Icons created by the community</h1>
         <ul className="grid gap-2 sm:gap-4 grid-cols-2 sm:grid-cols-4  md:grid-cols-6">
             {icons.data?.map((icon: Icon) =>(
                 <li key={icon.id}>
