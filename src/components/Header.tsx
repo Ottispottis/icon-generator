@@ -12,7 +12,7 @@ export function Header(){
     const {buyCredits} = useBuyCredits();
     const session = useSession();
     const isLoggedIn = !!session.data;
-    const credits = api.user.getCredits.useQuery();
+    const credits = api.user.getCredits.useQuery(undefined, {enabled: isLoggedIn});
     return <header className="bg-gray-300 dark:bg-gray-900">
         <div className="container mx-auto flex h-16 items-center justify-between px-4 ">
             <MyLink href="/" >Icon Generator</MyLink>

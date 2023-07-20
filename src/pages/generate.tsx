@@ -2,13 +2,15 @@ import { type NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "~/components/Button";
 import { FormGroup } from "~/components/formGroup";
 import { Input } from "~/components/input";
 import { api } from "~/utils/api";
 
 const GeneratePage: NextPage = () => {
+
+
     const colors = [
         "blue",
         "red",
@@ -39,6 +41,7 @@ const GeneratePage: NextPage = () => {
 
       ];
 
+    const [error, setError] = useState("")
     const [form, setForm] = useState({
         prompt: "",
         color: "",
@@ -48,17 +51,27 @@ const GeneratePage: NextPage = () => {
     })
     const [imageUrls, setImageUrls] = useState<{imageUrl: string}[]>([])
 
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      };
+
     const generateIcon = api.generate.generateIcon.useMutation({
         onSuccess(data){
             if (!data) return;
             setImageUrls(data)
+        },
+        onError(error) {
+            setError(error.message);
         }
     });
 
+    useEffect(()=>{
+        scrollToTop();
+    }, [error])
 
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        // TODO: Submit form data to the backend
+        setError('')
         generateIcon.mutate({
             ...form,
             numberOfIcons: parseInt(form.numberOfIcons)
@@ -83,6 +96,12 @@ const GeneratePage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className=" mt-12 sm:mt-24 flex min-h-screen flex-col container mx-auto px-4">
+
+        {error &&
+             
+            <div className="text-center bg-red-500 text-white rounded p-4 text-xl">{error}</div>
+            
+        }
         <section className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-4 sm:mb-4">
             <div className="flex flex-col gap-4">
                 <h1 className="text-2xl sm:text-4xl">Start generating your icons.</h1> 
@@ -90,6 +109,7 @@ const GeneratePage: NextPage = () => {
             </div>
         </section>  
       {isLoggedIn ? <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+        
         <h2 className="text-xl">1. Describe the what you want your icons to look like. </h2>
             <FormGroup className="mb-8">
                 <label>Prompt</label>
@@ -166,6 +186,8 @@ const GeneratePage: NextPage = () => {
                 
                    
             </FormGroup>
+
+            
             
             <Button isLoading={generateIcon.isLoading} disabled={generateIcon.isLoading}>Submit</Button>
             

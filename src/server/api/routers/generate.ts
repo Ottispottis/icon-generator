@@ -52,12 +52,12 @@ export const generateRouter = createTRPCRouter({
             where: {
                 id: ctx.session.user.id, 
                 credits: {
-                    gte: 1,
+                    gte: input.numberOfIcons,
                 },
             },
             data: {
                 credits: {
-                    decrement: 1,
+                    decrement: input.numberOfIcons,
                 },
             },
         });
