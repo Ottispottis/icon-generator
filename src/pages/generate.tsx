@@ -28,7 +28,7 @@ const GeneratePage: NextPage = () => {
         "claymorphic",
         "3d rendered",
         "pixelated",
-        "illustrated with color pencil",
+        "pencil drawn",
         "minecraft",
         "fractal art",
         "geometric",
@@ -138,7 +138,7 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
 
             <h2 className="text-xl">3. Pick the shape of your icon. </h2>
-            <FormGroup className="grid grid-cols-4 mb-8">
+            <FormGroup className="grid grid-cols-2 mb-8 sm:grid-cols-4">
                 {shapes.map((shape) => (
                 <label key={shape} className="flex gap-2 text-xl">
                     <input 
@@ -155,7 +155,7 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
 
             <h2 className="text-xl">4. Pick the style of your icon. </h2>
-            <FormGroup className="grid grid-cols-4 mb-8">
+            <FormGroup className="grid grid-cols-2 mb-8 sm:grid-cols-4">
                 {styles.map((style) => (
                 <label key={style} className="flex gap-2 text-xl">
                     <input 

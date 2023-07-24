@@ -14,7 +14,7 @@ export function Header(){
     const isLoggedIn = !!session.data;
     const credits = api.user.getCredits.useQuery(undefined, {enabled: isLoggedIn});
     return <header className="bg-gray-300 dark:bg-gray-900">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 ">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <MyLink href="/" >Icon Generator</MyLink>
             <ul className="flex gap-4">
                 <li><MyLink href={"/generate"} >Generate</MyLink></li>
