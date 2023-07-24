@@ -89,6 +89,7 @@ Fill in details as shown below and click "Pay" to receive more credits.
 ## Roadmap
 
 - [ ] Add the ability for users to download their icons from s3
+- [ ] Display example photos of each style in the style section of Generate page
 
 
 <!-- CONTACT -->
