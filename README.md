@@ -90,21 +90,13 @@ Fill in details as shown below and click "Pay" to receive more credits.
 
 - [ ] Add the ability for users to download their icons from s3
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Otto Heldt - otto.s.heldt@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: https://github.com/Ottispottis/icon-generator
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
