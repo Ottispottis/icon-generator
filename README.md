@@ -45,6 +45,8 @@ All the generated icons are stored in an AWS s3 bucket and match with the user t
 
 This project has a backend for handling the storing and retrieving of user data and icons, processing payments via Stripe and sending requests and receiving responses to and from the DALL-E 2 API. 
 
+It is hosted on AWS Amplify and automatically builds a new version when changes are pushed.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
