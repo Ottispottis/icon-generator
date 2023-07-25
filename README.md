@@ -2,7 +2,7 @@
 <a name="readme-top"></a>
 
 
-![image](https://github.com/Ottispottis/icon-generator/assets/44551242/fc6c18ee-ef74-4869-a236-1ff7f00634ba)
+![image](https://github.com/Ottispottis/icon-generator/assets/44551242/9ff257f6-5a43-4410-9130-a609e018b1e0)
 <br />
 <div align="center">
 
