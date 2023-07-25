@@ -71,11 +71,11 @@ It is hosted on AWS Amplify and automatically builds a new version when changes 
 3. Once logged in, click on generate.
    ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/b061631d-576d-4673-a683-5dd967e02130)
 4. Fill out the form
-   ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/7aeedf82-0da3-4947-b330-750fb66007e8)![image](https://github.com/Ottispottis/icon-generator/assets/44551242/4c42f222-7b11-481e-bf8b-25808843af40)
+   ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/7aeedf82-0da3-4947-b330-750fb66007e8)
 
 5. Click submit
 6. View the icons you generated
-   ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/7c7c1ece-fdf5-4c5c-a662-4e9361eb77b9)
+   ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/ed9a8be3-1d4a-4fe8-933a-276f80ccb9b4)
 
 All the icons you generate are available on the "Collections" page.
 ![image](https://github.com/Ottispottis/icon-generator/assets/44551242/016ff060-fa20-4f62-a625-d347b50204e8)
