@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/Button";
+import { ColorInput } from "~/components/ColorInput";
 import { FormGroup } from "~/components/formGroup";
 import { Input } from "~/components/input";
 import { api } from "~/utils/api";
@@ -13,9 +14,13 @@ const GeneratePage: NextPage = () => {
 
     const colors = [
         "blue",
+        "PowderBlue",
         "red",
-        "pink",
+        "Magenta",
+        "HotPink",
+        "MediumSeaGreen",
         "green",
+        "Olive",
         "orange",
         "yellow",
         "white",
@@ -121,19 +126,22 @@ const GeneratePage: NextPage = () => {
             </FormGroup>
 
             <h2 className="text-xl">2. Pick the color of your icon. </h2>
-            <FormGroup className="grid grid-cols-4 mb-8">
+            <FormGroup className="grid grid-cols-4 grid-rows-2 gap-2">
                 {colors.map((color) => (
-                <label key={color} className="flex gap-2 text-xl">
-                    <input 
-                    type="radio" 
-                    name="color" 
+                    <div key={color} className="h-16 w-16">
+                    <><ColorInput
+                    color={color}
                     value={color}
-                    checked={color === form.color}
                     required
+                    className={`bg-${color}-500 hover:bg-${color}-500`}
                     onChange={()=> setForm((prev)=>({...prev, color}))}>
-                    </input>
-                    {color}
-                </label>
+                    </ColorInput>
+                    
+                    <label key={color} className="sr-only">
+
+                            {color}
+                        </label></>
+                    </div>
                 ))}    
             </FormGroup>
 

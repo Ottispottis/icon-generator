@@ -68,7 +68,7 @@ export const generateRouter = createTRPCRouter({
             });
         }
 
-        const finalPrompt = `a modern ${input.shape} icon in ${input.color} of ${input.prompt}, ${input.style}, high quality, high resolution, trending on ArtStation`
+        const finalPrompt = `a modern ${input.style} ${input.shape} shaped icon in ${input.color} color of ${input.prompt}, high quality, high resolution, trending on ArtStation`
         const base64EncodedImages = await iconGeneration(finalPrompt, input.numberOfIcons);
 
         const BUCKET_NAME = 'icon-generator-dalle';
